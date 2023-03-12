@@ -3,10 +3,11 @@
 require 'json'
 
 def clear_core(data)
+  # keep = ['path', 'label']
+  keep = ['path']
   json = JSON.parse(data)
   json['items'].each do |item|
-    item['core_path'] = ""
-    item['core_name'] = ""
+    item.keep_if {|key, value| keep.include?(key)}
   end
   JSON.pretty_generate(json)
 end
