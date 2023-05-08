@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'json'
 
@@ -7,7 +8,7 @@ def clear_core(data)
   keep = ['path']
   json = JSON.parse(data)
   json['items'].each do |item|
-    item.keep_if {|key, value| keep.include?(key)}
+    item.keep_if { |key, _| keep.include?(key) }
   end
   JSON.pretty_generate(json)
 end
@@ -17,8 +18,7 @@ def clear_core_from_file(path)
   clear_core(data)
 end
 
-if __FILE__ == $0
+if __FILE__ == $PROGRAM_NAME
   print clear_core_from_file('content_favorites.lpl')
+  return
 end
-
-
